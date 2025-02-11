@@ -13,15 +13,16 @@
   <form id="uploadForm">
     <input type="file" id="photo" accept="image/*" required>
     <div>
-      <button type="submit" id="agree" aria-label="Agree to Archive">Agree to Archive</button>
-      <button type="button" id="disagree" aria-label="Disagree">Disagree</button>
+      <button type="button" id="uploadButton" aria-label="Upload Photo">Upload Photo</button>
     </div>
   </form>
 
-  <h2>Public Archive</h2>
-  <div id="gallery"></div>
+  <div id="consentDialog" style="display:none;">
+    <p>Do you consent to your photo being published in the archive?</p>
+    <button type="button" id="consentYes">Yes</button>
+    <button type="button" id="consentNo">No</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-

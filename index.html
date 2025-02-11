@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Upload Your Photo</h1>
+  <p>Scan the QR code and upload your photo. You must agree to publish it in the archive.</p>
+
+  <form id="uploadForm">
+    <input type="file" id="photo" accept="image/*" required>
+    <div>
+      <button type="submit" id="agree" aria-label="Agree to Archive">Agree to Archive</button>
+      <button type="button" id="disagree" aria-label="Disagree">Disagree</button>
+    </div>
+  </form>
+
+  <h2>Public Archive</h2>
+  <div id="gallery"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

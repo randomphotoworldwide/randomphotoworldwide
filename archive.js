@@ -17,21 +17,24 @@ document.getElementById("consentNo").addEventListener("click", () => {
 
 function handleUpload(consent) {
   const photoInput = document.getElementById("photo");
+  const gallery = document.getElementById("gallery");
+  const img = document.createElement("img");
+  const objectURL = URL.createObjectURL(photoInput.files[0]);
+  img.src = objectURL;
+  img.onload = () => {
+    URL.revokeObjectURL(objectURL);
+  };
+
   if (consent) {
-    const gallery = document.getElementById("gallery");
-    const img = document.createElement("img");
-    const objectURL = URL.createObjectURL(photoInput.files[0]);
-    img.src = objectURL;
-    img.onload = () => {
-      URL.revokeObjectURL(objectURL);
-    };
     gallery.appendChild(img);
-    alert("Photo uploaded and added to the archive!");
-    window.location.href = "archive.html"; // Redirect to the archive page
+    alert("Photo uploaded and added to the public archive!");
   } else {
-    alert("Photo uploaded but not included in the archive.");
+    const privateGallery = document.getElementById("privateGallery");
+    privateGallery.appendChild(img);
+    alert("Photo uploaded but added to the private archive.");
   }
 
   document.getElementById("uploadForm").reset();
   document.getElementById("consentDialog").style.display = "none";
+  window.location.href = "archive.html"; // Redirect to the public archive page
 }

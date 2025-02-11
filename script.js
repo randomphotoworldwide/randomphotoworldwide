@@ -1,47 +1,69 @@
-document.getElementById("uploadButton").addEventListener("click", () => {
-  const photoInput = document.getElementById("photo");
-  if (!photoInput.files[0]) {
-    alert("Please select a photo to upload.");
-    return;
-  }
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
 
-  // Show consent dialog
-  document.getElementById("consentDialog").style.display = "block";
-});
+h1 {
+  color: #333;
+}
 
-document.getElementById("consentYes").addEventListener("click", () => {
-  handleUpload("public");
-});
+form {
+  margin: 20px auto;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  max-width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-document.getElementById("consentNo").addEventListener("click", () => {
-  handleUpload("private");
-});
+input {
+  margin: 10px 0;
+}
 
-function handleUpload(destination) {
-  const photoInput = document.getElementById("photo");
-  const file = photoInput.files[0];
+button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+}
 
-  if (!file) {
-    alert("No file selected.");
-    return;
-  }
+#agree {
+  background-color: green;
+  color: white;
+}
 
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const imageData = event.target.result;
-    
-    if (destination === "public") {
-      localStorage.setItem(`public-${Date.now()}`, imageData);
-      setTimeout(() => {
-        window.location.href = "archive.html";  // 🔥 Fixed: Delay ensures image is stored first
-      }, 500);
-    } else {
-      localStorage.setItem(`private-${Date.now()}`, imageData);
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 500);
-    }
-  };
-  
-  reader.readAsDataURL(file);
+#disagree {
+  background-color: red;
+  color: white;
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#gallery img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#privateGallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#privateGallery img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

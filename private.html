@@ -43,5 +43,61 @@
       });
     }
   </script>
+
+<script>
+  const correctPassword = "yourSecretPassword";  // Set your admin password
+
+  function checkPassword() {
+    const enteredPassword = document.getElementById("passwordInput").value;
+    if (enteredPassword === correctPassword) {
+      document.getElementById("passwordPrompt").style.display = "none";
+      document.getElementById("privateGallery").style.display = "block";
+      loadPrivateImages();
+    } else {
+      alert("Incorrect password. Access denied.");
+    }
+  }
+
+  function loadPrivateImages() {
+    const gallery = document.getElementById("privateGallery");
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith("private-")) {
+        const imgWrapper = document.createElement("div");
+        imgWrapper.style.display = "inline-block";
+        imgWrapper.style.position = "relative";
+        imgWrapper.style.margin = "10px";
+
+        const img = document.createElement("img");
+        img.src = localStorage.getItem(key);
+        img.style.width = "200px";
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "❌";
+        deleteBtn.style.position = "absolute";
+        deleteBtn.style.top = "5px";
+        deleteBtn.style.right = "5px";
+        deleteBtn.style.display = "none";
+        deleteBtn.onclick = function () {
+          localStorage.removeItem(key);
+          location.reload();
+        };
+
+        imgWrapper.appendChild(img);
+        imgWrapper.appendChild(deleteBtn);
+        gallery.appendChild(imgWrapper);
+      }
+    });
+  }
+
+  function enableDeleteMode() {
+    document.querySelectorAll("button").forEach(btn => {
+      btn.style.display = "block";
+    });
+  }
+
+  document.body.insertAdjacentHTML("beforeend", '<button onclick="enableDeleteMode()">Enable Delete Mode</button>');
+</script>
+
+  
 </body>
 </html>

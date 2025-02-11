@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Private Uploads</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Private Uploads (Only for Admin)</h1>
-  <div id="privateGallery"></div>
+const correctPassword = "yourSecretPassword";  // 🔥 Change this to your own password
 
-  <script src="private.js"></script>
-</body>
-</html>
+function checkPassword() {
+  const enteredPassword = document.getElementById("passwordInput").value;
+  
+  if (enteredPassword === correctPassword) {
+    document.getElementById("passwordPrompt").style.display = "none";
+    document.getElementById("privateGallery").style.display = "block";
+    loadPrivateImages();
+  } else {
+    alert("Incorrect password. Access denied.");
+  }
+}
+
+function loadPrivateImages() {
+  const gallery = document.getElementById("privateGallery");
+
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith("private-")) {
+      const img = document.createElement("img");
+      img.src = localStorage.getItem(key);
+      gallery.appendChild(img);
+    }
+  });
+}

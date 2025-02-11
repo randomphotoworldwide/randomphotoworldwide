@@ -1,3 +1,29 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Public Archive</h1>
+  <div id="gallery"></div>
+  <script>
+    function loadPublicImages() {
+      const gallery = document.getElementById("gallery");
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith("public-")) {
+          const img = document.createElement("img");
+          img.src = localStorage.getItem(key);
+          img.style.width = "200px"; // Adjust size as needed
+          img.style.margin = "10px";
+          gallery.appendChild(img);
+        }
+      });
+    }
+    loadPublicImages();
+
 <script>
   function loadPublicImages() {
     const gallery = document.getElementById("gallery");

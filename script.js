@@ -27,15 +27,19 @@ function handleUpload(destination) {
   }
 
   const reader = new FileReader();
-  reader.onload = function(event) {
+  reader.onload = function (event) {
     const imageData = event.target.result;
     
     if (destination === "public") {
       localStorage.setItem(`public-${Date.now()}`, imageData);
-      window.location.href = "archive.html";
+      setTimeout(() => {
+        window.location.href = "archive.html";  // 🔥 Fixed: Delay ensures image is stored first
+      }, 500);
     } else {
       localStorage.setItem(`private-${Date.now()}`, imageData);
-      window.location.href = "index.html";
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 500);
     }
   };
   

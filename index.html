@@ -16,5 +16,27 @@
 <label><input type="radio" name="consent" value="no"> No</label>
 <button>Submit</button>
 </form>
+  <script>
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", () => {
+    // Show feedback so the page doesn't feel broken
+    document.body.innerHTML = `
+      <div style="
+        background:#3f0d1b;
+        color:#f3eddc;
+        font-family: Georgia, serif;
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+      ">
+        <p>Your image is being placed into the archive.<br><br>Please wait…</p>
+      </div>
+    `;
+  });
+</script>
+
 </body>
 </html>

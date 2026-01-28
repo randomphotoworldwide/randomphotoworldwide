@@ -1,82 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Photo Archive</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<html>
+<head><link rel="stylesheet" href="style.css"></head>
 <body>
-  <h1>UPLOAD A RANDOM PHOTO</h1>
+<nav>
+<a href="archive.html">Archive</a>
+<a href="portfolio.html">Portfolio</a>
+</nav>
 
-  <form id="uploadForm">
-    <input type="file" id="photo" accept="image/*" required>
-    <div>
-      <button type="button" id="uploadButton" aria-label="Upload Photo">Upload</button>
-    </div>
-  </form>
+<h1>UPLOAD A RANDOM PHOTO</h1>
 
-  <div id="consentDialog" style="display:none;">
-    <p>Do you consent to your photo being published in the archive?</p>
-    <button type="button" id="consentYes">Yes</button>
-    <button type="button" id="consentNo">No</button>
-  </div>
-
-  <div id="privateGallery" style="display:none;"></div>
-  <a href="archive.html">Go to Archive</a>
-
-  <script src="script.js"></script>
-
-
-<script>
-document.getElementById("uploadButton").addEventListener("click", () => {
-  const photoInput = document.getElementById("photo");
-  if (!photoInput.files[0]) {
-    alert("Please select a photo to upload.");
-    return;
-  }
-
-  // Show consent dialog
-  document.getElementById("consentDialog").style.display = "block";
-});
-
-document.getElementById("consentYes").addEventListener("click", () => {
-  handleUpload("public");
-});
-
-document.getElementById("consentNo").addEventListener("click", () => {
-  handleUpload("private");
-});
-
-function handleUpload(destination) {
-  const photoInput = document.getElementById("photo");
-  const file = photoInput.files[0];
-
-  if (!file) {
-    alert("No file selected.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const imageData = event.target.result;
-
-    if (destination === "public") {
-      localStorage.setItem(`public-${Date.now()}`, imageData);
-      window.location.href = "archive.html";  // ✅ Redirect to archive
-    } else {
-      localStorage.setItem(`private-${Date.now()}`, imageData);
-      window.location.href = "private.html";  // ✅ Redirect to private archive
-    }
-  };
-
-  reader.readAsDataURL(file);
-}
-</script>
-
-
-  
+<form action="/upload-archive" method="POST" enctype="multipart/form-data">
+<input type="file" name="photo" accept="image/*" required>
+<p>Do you consent to your photo being published in the archive?</p>
+<label><input type="radio" name="consent" value="yes" required> Yes</label>
+<label><input type="radio" name="consent" value="no"> No</label>
+<button>Submit</button>
+</form>
 </body>
 </html>
-
-

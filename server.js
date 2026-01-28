@@ -26,16 +26,15 @@ destination: 'uploads/portfolio',
 filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
 
-const archiveUpload = multer({ storage: archiveStorage });
-const portfolioUpload = multer({ storage: portfolioStorage });
-// ARCHIVE UPLOAD (CONSENT BASED)
 app.post('/upload-archive', archiveUpload.single('photo'), (req, res) => {
-if (req.body.consent !== 'yes') {
-fs.unlinkSync(req.file.path);
-return res.redirect('/');
-}
-res.redirect('/archive.html');
+  if (req.body.consent !== 'yes') {
+    fs.unlinkSync(req.file.path);
+    return res.json({ redirect: '/' });
+  }
+
+  res.json({ redirect: '/archive.html' });
 });
+
 
 // LOGIN
 app.post('/login', (req, res) => {

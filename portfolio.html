@@ -1,0 +1,16 @@
+<body>
+<nav>
+<a href="index.html">Home</a>
+<a href="login.html">Edit Portfolio</a>
+</nav>
+
+<h1>Portfolio</h1>
+
+<form action="/upload-portfolio" method="POST" enctype="multipart/form-data">
+<input type="file" name="file" accept="image/*,video/*">
+<button>Upload</button>
+</form>
+
+<div id="portfolio" class="museum"></div>
+<script src="script.js"></script>
+</body>

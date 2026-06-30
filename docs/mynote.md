@@ -136,6 +136,4 @@ def generate_upload_url(filename: str):
 
 To keep everything strictly inside Europe, you can deploy this exact code on these platforms:
 
-1. **Hetzner Online** (Germany / Finland) — Outstanding pricing for heavy storage and virtual private servers.
 2. **Scaleway** (France / Netherlands / Poland) — Native European cloud ecosystem built for modern developer workflows.
-3. **OVHcloud** (France / Germany) — The largest European infrastructure provider, great for fixed data costs.
